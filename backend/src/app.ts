@@ -3,6 +3,7 @@ import cors from "cors";
 import userRoutes from "./routes/user";
 import authRoutes from "./routes/auth";
 import errorHandler from "./middleware/errorHandler";
+import { tokenHandler } from "./middleware/tokenHandler";
 
 const app: Application = express();
 
@@ -15,12 +16,12 @@ app.use(cors({
 app.use(express.json());
 
 app.use("/api/auth", authRoutes); // Auth routes
-app.use("/api/users", userRoutes); // User routes
+app.use("/api/users", tokenHandler, userRoutes); // User routes
 
-// Health check
-app.get("/", (req, res) => {
-  res.send("Backend is running...");
-});
+// // Health check
+// app.get("/", (req, res) => {
+//   res.send("Backend is running...");
+// });
 
 // Global Error Handler
 app.use(errorHandler);

@@ -1,8 +1,8 @@
 import express from 'express';
-import { getAllUsers } from '../controllers/user';
+import { getAllUsers, updateUser, deleteUser } from '../controllers/user';
 const router = express.Router();
 
-// GET all users (protected route)
-router.get('/', getAllUsers);
-
+router.get('/', getAllUsers); // Get all users
+router.put('/:id', updateUser); // Update user
+router.delete('/:id', deleteUser); // Delete User
 export default router;
